@@ -4,9 +4,9 @@ import torch
 import torch.nn as nn
 import random
 import numpy as np
-from modules.encoder import EncoderCNN, EncoderLabels
-from modules.transformer_decoder import DecoderTransformer
-from modules.multihead_attention import MultiheadAttention
+from .modules.encoder import EncoderCNN, EncoderLabels
+from .modules.transformer_decoder import DecoderTransformer
+from .modules.multihead_attention import MultiheadAttention
 from utils.metrics import softIoU, MaskedCrossEntropyCriterion
 import pickle
 import os

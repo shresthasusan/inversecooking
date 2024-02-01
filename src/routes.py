@@ -1,6 +1,6 @@
 from flask import render_template ,url_for,flash,redirect,request
 from . import app
-from output import output
+from .output import output
 import os
 
 
