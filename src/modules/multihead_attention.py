@@ -10,8 +10,7 @@ import torch
 from torch import nn
 from torch.nn import Parameter
 import torch.nn.functional as F
-
-from modules.utils import fill_with_neg_inf, get_incremental_state, set_incremental_state
+from src.modules.utils import fill_with_neg_inf, get_incremental_state, set_incremental_state
 
 
 class MultiheadAttention(nn.Module):

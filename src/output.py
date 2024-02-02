@@ -8,15 +8,14 @@ import pickle
 from PIL import Image
 from .model import get_model
 from torchvision import transforms
-from utils.output_utils import prepare_output
-from PIL import Image
+from .utils.output_utils import prepare_output
 import time
 from . import app
 
 def output(uploadedfile):
 
     # Keep all the codes and pre-trained weights in data directory
-    data_dir = '../data'
+    data_dir = os.path.abspath('C:\\Users\\shres\\Desktop\\inversecooking\\data')
 
 
     # code will run in gpu if available and if the flag is set to True, else it will run on cpu
@@ -66,7 +65,7 @@ def output(uploadedfile):
 
     uploaded_file=uploadedfile
 
-    img=Image.load_img(uploaded_file)
+    img=Image.open(uploaded_file)
     
     show_anyways = False #if True, it will show the recipe even if it's not valid
     transf_list = []
