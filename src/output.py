@@ -67,7 +67,7 @@ def output(uploadedfile):
 
     img=Image.open(uploaded_file)
     
-    show_anyways = False #if True, it will show the recipe even if it's not valid
+    show_anyways = True #if True, it will show the recipe even if it's not valid
     transf_list = []
     transf_list.append(transforms.Resize(256))
     transf_list.append(transforms.CenterCrop(224))
