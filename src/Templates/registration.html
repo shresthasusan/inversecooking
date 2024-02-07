@@ -17,13 +17,24 @@
     <title>Recipelens</title>
     <link rel="shortcut icon" href="{{ url_for('static', filename='images/Group_11.png') }}" sizes="32x32">
 </head>
-<body >
+<body>
+    
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <ul class=flashes>
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
+
     <form method="POST" action="/register">
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" required><br><br>
         <label for="password">Password</label>
         <input type="password" id="password" name="password" required><br><br>
-        <input type="submit" value="login">
+        <input type="submit" value="Sign Up">
     </form>
     <!-- Navigation Bar
     <div id="Section-1">

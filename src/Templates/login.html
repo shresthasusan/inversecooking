@@ -16,12 +16,21 @@
 
     <title>Recipelens</title>
     <link rel="shortcut icon" href="{{ url_for('static', filename='images/Group_11.png') }}" sizes="32x32">
+
 </head>
 <body >
-    {% if error %}
-  <p class="error-message" style="color: red;">{{ error }}</p>
-{% endif %}
-    <form method="POST" action="/home">
+   
+    <div id="loading" style="display:none;" class="col-md-8">
+        <div class="loader">
+            <div class="inner one"></div>
+            <div class="inner two"></div>
+            <div class="inner three"></div>
+            <h4>Loading</h4>
+            <h5>Kindly wait for few seconds</h5>
+        </div>
+    </div>
+
+    <form method="POST" action="/login">
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" required><br><br>
         <label for="password">Password</label>
@@ -29,31 +38,7 @@
         <input type="submit" value="login">
     </form>
     <p>not registered? </p><a href="{{url_for('register')}}">register now </a>
-    <!-- Navigation Bar
-    <div id="Section-1">
-        <nav class="navbar navbar-expand-lg navbar-light bg-grey">
-            <a class="navbar-brand mr-auto" href="{{url_for('home')}}" style="font-family: 'Times New Roman', Times, serif;">
-                <img src="{{ url_for('static',filename='images/favicon.ico') }}" width="30" height="30" class="d-inline-block align-top" alt="" style="margin-top: -5.5px;">
-                </a>
-            <a href="{{url_for('home')}}" class="w-100 text-center text-dark">RECIPE GENERATION FROM FOOD IMAGE</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse " id="navbarNavDropdown">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                <a class="nav-link" href="{{url_for('home')}}">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item active">
-                <a class="nav-link" href="{{url_for('about')}}">About</a>
-                </li>
-            </ul>
-            </div>
-        </nav>
-    </div>
-    
-   -->
-
+   
 
 
     {% block content %}{% endblock %}
