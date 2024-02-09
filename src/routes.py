@@ -107,7 +107,7 @@ def logout():
 # App routes
   
 @app.route('/home')
-@login_required
+# @login_required
 def home():
     return render_template('home.html')
     
