@@ -1,0 +1,33 @@
+body {
+    background-image: url("login-bg.png");
+    background-size:  cover;
+
+   }
+
+.wrapper{
+    background-color: #131313;
+    color: #B5B5B5;
+    opacity: 95%;
+    padding: 20px 2% ;
+    /* margin: auto; */
+    position: absolute;
+    top:   30%;
+}
+input{
+    outline: none;
+    background-color: #131313;
+    border: none;
+    color: white;
+}
+
+input::placeholder {
+    color: #B5B5B5;
+  }
+.custom-form{
+    margin: 2px;
+    border-color: white;
+    width: 80%;
+    border-style: solid;
+    border-width: 5px;
+    border-width: 0 0px 2px 0;
+}
