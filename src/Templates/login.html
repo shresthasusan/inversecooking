@@ -32,6 +32,14 @@
                 <h5>Kindly wait for few seconds</h5>
             </div>
         </div>
+        <div class="col-md-auto logo">
+            <img src="{{ url_for('static', filename='images/logo.svg') }}" style="
+            top: 15%;
+            position: fixed;
+            transform: translate(-90px, 10px);
+        " alt="logo">
+
+        </div>
         <div class="card wrapper col-md-auto" style="width: 465px;">
             <h2 style="text-align: center; font-weight: bold; color: white;">Sign in<input type="text" name="" id=""></h2>
             {% block content %}

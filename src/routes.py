@@ -56,7 +56,7 @@ def register():
 
         if existing_user:
             flash('Username already exists. Please choose another username.', 'error')
-            return render_template('registration.html',error='Invalid username or password')
+            return redirect(url_for('register'))
 
         # Hash the password before storing it
         hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
