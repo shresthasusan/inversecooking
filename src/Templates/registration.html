@@ -19,16 +19,14 @@
 </head>
 <body>
     
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
-      <ul class=flashes>
-      {% for message in messages %}
-        <li>{{ message }}</li>
-      {% endfor %}
-      </ul>
-    {% endif %}
-  {% endwith %}
 
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+      <div class="notification is-danger">
+          {{ messages[0] }}. Go to <a href="{{ url_for('login') }}">login page</a>.
+      </div>
+  {% endif %}
+  {% endwith %}
     <form method="POST" action="/register">
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" required><br><br>

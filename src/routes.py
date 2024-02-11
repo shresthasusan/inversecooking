@@ -6,22 +6,13 @@ from .output import output
 from werkzeug.utils import secure_filename
 import os
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_login import login_required, login_user, logout_user
+
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager,  UserMixin
+
 
 mysql = MySQL(app)
-login_manager = LoginManager(app)
-login_manager.login_view = 'login'
 
-# User model
-class User(UserMixin):
-    def __init__(self, uid, username, password):
-        self.id = uid
-        self.username = username
-        self.password = password
-
-@app.route("/")
+# @app.route("/")
 @app.route('/login', methods=['POST', 'GET'])
 def login():
     if 'username' in session:
@@ -37,8 +28,7 @@ def login():
             user_data = cur.fetchone()
             cur.close()
             if user_data and check_password_hash(user_data[2], password_input):
-                user = User(uid=user_data[0], username=user_data[1], password=user_data[2])
-                login_user(user)
+                session['uid'] = user_data[0]
                 flash('Login successful', 'success')
                 return redirect(url_for('home'))  # Redirect to the home route after successful login
             else:
@@ -48,17 +38,6 @@ def login():
     return render_template('login.html')
 
 
-
-
-@login_manager.user_loader
-def load_user(uid):
-    cur = mysql.connection.cursor()
-    cur.execute("SELECT uid, username, password FROM users WHERE uid = %s", (uid,))
-    user_data = cur.fetchone()
-    cur.close()
-
-    if user_data:
-        return User(uid=user_data[0], username=user_data[1], password=user_data[2])
 
 
 # Registration Routes
@@ -80,7 +59,7 @@ def register():
             return render_template('registration.html',error='Invalid username or password')
 
         # Hash the password before storing it
-        hashed_password = generate_password_hash(password, method='sha256')
+        hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
 
         # Save 'username' and 'hashed_password' in the database
         cur = mysql.connection.cursor()
@@ -96,7 +75,6 @@ def register():
 # Log our route 
 @app.route('/logout')
 def logout():
-    logout_user()
     # Clear the session
     session.clear()
 
@@ -106,10 +84,12 @@ def logout():
 
 # App routes
   
-@app.route('/home')
-# @login_required
+@app.route('/')
 def home():
-    return render_template('home.html')
+    if 'uid' in session:
+        return render_template('home.html')
+    else:
+        return redirect(url_for('login'))
     
 
     
