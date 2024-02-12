@@ -121,13 +121,14 @@ def my_recipes():
 
     # Retrieve saved recipes for the current user
     cur = mysql.connection.cursor()
-    cur.execute("SELECT title, ingredients FROM recipes WHERE uid = %s", (session['uid'],))
-    saved_recipes = cur.fetchone()
+    cur.execute("SELECT title, ingredients FROM recipes WHERE uid = 2")
+    saved_recipes = cur.fetchall()
     cur.close()
     print(saved_recipes)
     # Render the saved recipes page
     return render_template('my_recipes.html', saved_recipes=saved_recipes)
     # return render_template('my_recipes.html')
+
 
 
 @app.route('/<samplefoodname>')

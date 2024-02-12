@@ -1,29 +1,27 @@
-{% extends "layout.html" %}
+{% extends "header.html" %}
 {% block content %}
-
-<h1>Saved Recipes</h1>
+    <h1>Saved Recipes</h1>
     
-{% if saved_recipes %}
-    <table border="1">
-        <thead>
-            <tr>
-                <th>Recipe Title</th>
-                <th>Ingredients</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for recipe in saved_recipes %}
-            <tr>
-                <td>{{ recipe.recipe_title }}</td>
-                <td>{{ recipe.recipe_ingredients }}</td>
-                <td><a href="{{ url_for('view_recipe', recipe_id=recipe.recipe_id) }}">View Details</a></td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-{% else %}
-    <p>No saved recipes found.</p>
-{% endif %}
-
-{% endblock content %}
+    {% if saved_recipes %}
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Recipe Title</th>
+                    <th>Ingredients</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for recipe in saved_recipes %}
+                <tr>
+                    <td>{{ recipe.title }}</td>
+                    <td>{{ recipe.ingredients }}</td>
+                    <td><a href="{{ url_for('view_recipe', recipe_id=recipe.id) }}">View Details</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No saved recipes found.</p>
+    {% endif %}
+{% endblock %}
