@@ -1,16 +1,17 @@
 body {
     background-image: url("login-bg.png");
     background-size:  cover;
+    
 
    }
 
 .wrapper{
     background-color: #131313;
     color: #B5B5B5;
-    opacity: 95%;
+    opacity: 97%;
     padding: 20px 2% ;
     /* margin: auto; */
-    position: absolute;
+    /* position: absolute; */
     top:   30%;
 }
 input{

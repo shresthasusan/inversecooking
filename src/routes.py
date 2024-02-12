@@ -15,7 +15,7 @@ mysql = MySQL(app)
 # @app.route("/")
 @app.route('/login', methods=['POST', 'GET'])
 def login():
-    if 'username' in session:
+    if 'uid' in session:
         flash('You are already logged in', 'info')
         return redirect(url_for('home'))
     
@@ -97,6 +97,8 @@ def home():
 def about():
     return render_template('about.html')
 
+
+
 @app.route('/predict',methods=['POST','GET'])
 
 def predict():
@@ -110,9 +112,52 @@ def predict():
 
     return render_template('predict.html', title=title, ingredients=ingredients, recipe=recipe, img=img)
 
+
+
+@app.route('/my_recipes',methods=['GET'])
+def my_recipes():
+    if 'uid' not in session:
+        return redirect(url_for('login'))
+
+    # Retrieve saved recipes for the current user
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT title, ingredients FROM recipes WHERE uid = %s", (session['uid'],))
+    saved_recipes = cur.fetchone()
+    cur.close()
+    print(saved_recipes)
+    # Render the saved recipes page
+    return render_template('my_recipes.html', saved_recipes=saved_recipes)
+    # return render_template('my_recipes.html')
+
+
 @app.route('/<samplefoodname>')
 def predictsample(samplefoodname):
     imagefile=os.path.join(app.root_path,'static\\images',str(samplefoodname)+".jpg")
     img="/images/"+str(samplefoodname)+".jpg"
     title,ingredients,recipe = output(imagefile)
     return render_template('predict.html',title=title,ingredients=ingredients,recipe=recipe,img=img)
+
+# Function to save recipe to database
+def save_recipe(user_id, recipe_title, recipe_ingredients, recipe_steps):
+    user_id = session['uid']
+    recipe_title = request.form['recipe_title']
+    recipe_ingredients = request.form['recipe_ingredients']
+    recipe_steps = request.form['recipe_steps']
+    cur = mysql.connection.cursor()
+    cur.execute("INSERT INTO recipe (uid, title, ingredients, recipe) VALUES (%s, %s, %s, %s)",
+              (user_id, recipe_title, recipe_ingredients, recipe_steps))
+    mysql.connection.commit()
+    cur.close()
+
+@app.route('/save_recipe', methods=['POST'])
+def save_recipe_to_db():
+    if request.method == 'POST':
+        user_id = session['uid']
+        recipe_title = request.form['recipe_title']
+        recipe_ingredients = request.form['recipe_ingredients']
+        recipe_steps = request.form['recipe_steps']
+        
+        save_recipe(user_id, recipe_title, recipe_ingredients, recipe_steps)
+        return 'Recipe saved successfully!'
+    else:
+        return 'Invalid request method'

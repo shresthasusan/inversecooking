@@ -36,6 +36,13 @@
                         {% endif %}
                         <br>
                         <p class="card-text"><small class="text-muted">Check both the Recipes</small></p>
+                        <form action="/save_recipe" method="post">
+                          <input type="hidden" name="recipe_title" value="{{ title[0] }}">
+                          <input type="hidden" name="recipe_ingredients" value="{{ ', '.join(ingredients[0]) }}">
+                          <input type="hidden" name="recipe_steps" value="{{ ', '.join(recipe[0]) }}">
+                          <input type="submit" class="btn btn-primary" value="Save Recipe">
+                      </form>
+                      
                       </div>
                     </div>
 
@@ -60,6 +67,14 @@
                         <br>
                         <h6 class="card-text">{{recipe[1]}}</h6>
                         {% endif %}
+                        <form action="/save_recipe" method="post">
+                          <input type="hidden" name="user_id" value="user_id_here">
+                          <input type="hidden" name="recipe_title" value="{{ title[1] }}">
+                          <input type="hidden" name="recipe_ingredients" value="{{ ', '.join(ingredients[1]) }}">
+                          <input type="hidden" name="recipe_steps" value="{{ ', '.join(recipe[1]) }}">
+                          <input type="submit" class="btn btn-primary" value="Save Recipe">
+                      </form>
+                      
                       </div>
                     </div>
                     

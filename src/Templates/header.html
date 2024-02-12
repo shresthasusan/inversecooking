@@ -23,7 +23,7 @@
     <div id="Section-1">
         <nav class="navbar navbar-expand-lg navbar-light bg-grey">
             <a class="navbar-brand mr-auto" href="{{url_for('home')}}" style="font-family: 'Times New Roman', Times, serif;">
-                <img src="{{ url_for('static',filename='images/favicon.ico') }}" width="30" height="30" class="d-inline-block align-top" alt="" style="margin-top: -5.5px;">
+                <img src="{{ url_for('static',filename='images/kalologo.svg') }}" width="100" height="100" class="d-inline-block align-top" alt="" style="margin-top: -30.5px;">
                 </a>
             <a href="{{url_for('home')}}" class="w-100 text-center text-dark">RECIPE GENERATION FROM FOOD IMAGE</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,6 +40,9 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="{{url_for('logout')}}">signout</a>
                     </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{url_for('my_recipes')}}">My Recipes</a>
+                        </li>
             </ul>
             </div>
         </nav>
